@@ -78,8 +78,8 @@ namespace BugsonlineLIB
                 var base64String = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{username}:{password}"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64String);
 
-                //Se dà errore che non trova PostAsJsonAsync
-                //Installare da Nuget: Microsoft.AspNet.WebApi.Client
+                //If show an error because can't find PostAsJsonAsync
+                //install from Nuget: Microsoft.AspNet.WebApi.Client
                 response =  await client.PostAsJsonAsync<BOLBug>("api/send", bug);
                 Console.WriteLine("Server response: " + response.ReasonPhrase);
                 string text = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
