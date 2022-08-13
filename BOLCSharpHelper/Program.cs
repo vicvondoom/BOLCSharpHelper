@@ -1,27 +1,29 @@
-﻿using BugsonlineLIB;
-using System;
+﻿using System;
 using System.Globalization;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Bugsonline;
 
 namespace BOLTestAPI
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
 
             Console.WriteLine("Press a key to send bug..");
             Console.ReadKey();
 
             //First time setup istance
-            //Replace with your username and password!
-            //BOLSingleton ben = BOLSingleton.getInstance("YOUR@USERNAME", "YOURPASSWORD");
-            BOLSingleton ben = BOLSingleton.getInstance("demo@demo.com", "cicci0CICCI0_");
+            BOLHelper bol_init = BOLHelper.initInstance(
+                "demo@demo.com",
+                "cicci0CICCI0_",
+                "BOLTestAPI",
+                "1.0",
+                AppType.Console,
+                Languages.CSharp);
 
             //It's a singleton, next times you can obtain without login e pwd.
-            BOLSingleton ben2 = BOLSingleton.getInstance();
+            BOLHelper bol = BOLHelper.getInstance();
             int c = 0;
             try
             {
@@ -30,7 +32,7 @@ namespace BOLTestAPI
             catch(Exception ex)
             {
                 Console.WriteLine("Sending bug at " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
-                ben2.Send(ex);
+                await bol.Send(ex);
                 Console.WriteLine("Bug sent at " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture));
             }
             finally
