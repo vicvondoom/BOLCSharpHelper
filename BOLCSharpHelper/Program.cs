@@ -17,8 +17,8 @@ namespace BOLTestAPI
             BOLHelper bol_init = BOLHelper.initInstance(
                 "demo@demo.com",
                 "cicci0CICCI0_",
-                "BOLTestAPI",
-                "1.0",
+                System.Reflection.Assembly.GetExecutingAssembly().GetName().Name,
+                System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(),
                 AppType.Console,
                 Languages.CSharp);
 
